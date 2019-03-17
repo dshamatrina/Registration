@@ -1,0 +1,261 @@
+.form {
+    color: @colorMain;
+    width: 400px;
+    font-size: 12px;
+    background: @colorInverse;
+    margin: auto;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0px 2px 6px 0px rgba(0,0,0,.3);
+    &_title {
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: @colorGeneral;
+        text-align: center;
+        margin: 0 0 30px;
+        &:after {
+            content: url(../dev/img/underline.png);
+            display: block;
+            margin: 5px 0;
+        }
+    }
+    &_content {
+        text-align: left;
+        padding: 40px;
+    }
+    &_line {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        color: #000;
+        margin-bottom: 15px;
+        position: relative;
+    }
+    &_field {
+        position: relative;
+        border: none;
+        border-bottom: 1px solid @colorTextField;
+        min-width: 220px;
+        color: inherit;
+        font-size: 14px;
+        line-height: 3em;
+        &:invalid {
+            box-shadow: none;
+        }
+        &:focus {
+            outline: none;
+        }
+        &__invalid {
+            color: @colorError;
+            &:after {
+                content: "";
+                display: block;
+                height: 1px;
+                position: absolute;
+                width: 0;
+                bottom: 0;
+                left: 100px;
+                background: @colorError;
+                transition: .5s ease-in-out;
+                animation: slideunder .45s forwards;
+            }
+        }
+    }
+    &_checkbox {
+        flex-grow: 0;
+        cursor: pointer;
+        fill: @colorIcon;
+        border-bottom: 1px solid @colorTextField;
+        position: relative;
+        &__active,
+        &__active .form_icon {
+            border-bottom-color: @colorAccent;
+            fill: @colorAccent;
+        }
+        &:hover {
+            border-bottom-color: @colorAccent;
+            fill: @colorAccent;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &_checkbox-hidden {
+        margin: 15px;
+        opacity: 0;
+    }
+    &_select {
+        background: white;
+        color: inherit;
+        z-index: 200;
+        cursor: pointer;
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: calc(50% - 4px / 2);
+            right: 0;
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid currentColor;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    }
+    &_dropdown {
+        display: none;
+        &__active {
+            display: flex;
+            flex-flow: column;
+            position: absolute;
+            top: 100%;
+            z-index: 100;
+            width: calc(100% + 10px);
+            margin-left: -10px;
+            background: white;
+            max-height: 210px;
+            overflow: scroll;
+            cursor: pointer;
+            border-radius: 2px;
+            box-shadow: 0px 2px 6px 0px rgba(0,0,0,.3);
+        }
+    }
+    &_option {
+        list-style: none;
+        width: 100%;
+        padding-left: 10px;
+        color: @colorMain;
+        &__selected {
+            color: #000;
+        }
+        &:hover {
+            background: @colorBackgroundSelect;
+            cursor: pointer;
+        }
+    }
+    &_label {
+        display: inline-block;
+        cursor: pointer;
+        min-width: 100px;
+        font-size: 14px;
+        color: @colorAccent;
+    }
+    &_icon {
+        fill: @colorIcon;
+        &:hover {
+            cursor: pointer;
+            fill: @colorAccent;
+        }
+        &__male,
+        &__female {
+            position: absolute;
+            top: calc(50% - 14px);
+            left: calc(50% - 10px);
+            fill: inherit;
+        }
+        &__female {
+            margin-top: 4px;
+            margin-left: -3px;
+        }
+        &__location {
+            margin-right: 15px;
+            &:hover {
+                cursor: auto;
+                fill: @colorIcon;
+            }
+        }
+        &__question {
+            margin-left: auto;
+            display: block;
+            &:hover {
+                cursor: pointer;
+                & + .form_tooltip {
+                    display: block;
+                }
+            }
+        }
+    }
+    &_tip {
+        display: flex;
+        align-items: center;
+        position: relative;
+        & .form_tooltip {
+            display: none;
+        }
+    }
+    &_footer {
+        background: @colorBackgroundFooter;
+        border-radius: 2px;
+        padding: 40px;
+    }
+    &_button {
+        background: @colorAccent;
+        color: @colorInverse;
+        text-transform: uppercase;
+        width: 100%;
+        font-size: 14px;
+        padding: 15px;
+        border-radius: 2px;
+        margin-bottom: 20px;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    &_tooltip {
+        position: absolute;
+        opacity: 0;
+        top: 50%;
+        transform: translate(0,-50%);
+        left: 100%;
+        box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.3);
+        transition: all .5s ease-in-out;
+        animation: slidein .75s forwards;
+        &__error {
+            & .form_tooltip-text {
+                background: @colorError;
+                color: @colorInverse;
+            }
+            & .form_tooltip-triangle {
+                background: @colorError;
+            }
+        }
+    }
+    &_tooltip-triangle {
+        position: absolute;
+        top: calc(50% - 16px / 2);
+        left: -8px;
+        height: 16px;
+        width: 16px;
+        transform: rotate(45deg);
+        background: @colorInverse;
+        box-shadow: 0 2px 6px 0 rgba(0,0,0,.3);
+        z-index: -1;
+    }
+    &_tooltip-text {
+        background: @colorInverse;
+        border-radius: 2px;
+        color: #000;
+        z-index: 200;
+        padding: 10px 20px;
+        min-width: 150px;
+        text-align: center;
+        box-sizing: content-box;
+    }
+}
+
+@keyframes slidein {
+    100% {
+        opacity: 1;
+        left: 105%;
+    }
+}
+
+@keyframes slideunder {
+    100% {
+        width: 220px;
+    }
+}
